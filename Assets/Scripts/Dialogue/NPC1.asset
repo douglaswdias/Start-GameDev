@@ -25,6 +25,6 @@ MonoBehaviour:
   - actorName: Maria
     profile: {fileID: 0}
     sentence:
-      portuguese: "Como est\xE1?"
+      portuguese: "Esse \xE9 o come\xE7o do desenvolvimento deste jogo!"
       english: How are you?
       spanish: Como estas?

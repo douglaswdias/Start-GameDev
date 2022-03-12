@@ -456,9 +456,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 19
-        y: 853
-        width: 25
-        height: 7
+        y: 854
+        width: 10
+        height: 4
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1570,7 +1570,7 @@ TextureImporter:
         serializedVersion: 2
         x: 16
         y: 576
-        width: 32
+        width: 16
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1741,7 +1741,7 @@ TextureImporter:
         width: 32
         height: 21
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1762,7 +1762,7 @@ TextureImporter:
         width: 23
         height: 34
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1770,6 +1770,48 @@ TextureImporter:
       bones: []
       spriteID: de476a30d0e514e47a3d974b81e073e9
       internalID: -302971537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Objs_79
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 853
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6f98b5f6172dcb4bbb53fe89303805f
+      internalID: 437279551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Objs_80
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 576
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01c4f58aa41875f439c342cddfa6c560
+      internalID: -486637264
       vertices: []
       indices: 
       edges: []
@@ -1812,22 +1854,24 @@ TextureImporter:
       Objs_34: 1867921496
       Objs_41: -936858808
       Objs_22: -2021895620
-      Objs_6: -506668701
+      Objs_25: 1804370561
+      Objs_78: 1703404609
       Objs_13: -1163938284
+      Objs_6: -506668701
+      Objs_79: 437279551
       Objs_49: -1426537337
       Objs_50: 1920720832
       Objs_10: -108695237
-      Objs_64: -148486986
-      Objs_14: 447949068
-      Objs_77: -302968941
+      Objs_80: -486637264
       Objs_32: 546605941
-      Objs_25: 1804370561
+      Objs_14: 447949068
       Objs_44: 616703109
       Objs_18: 1305918859
-      Objs_78: 1703404609
+      Objs_64: -148486986
       Objs_30: -828209519
       Objs_59: 372392216
       Objs_75: -812985845
+      Objs_77: -302968941
       Objs_72: 720780877
       Objs_54: -1472659713
       Objs_39: 1814973263
