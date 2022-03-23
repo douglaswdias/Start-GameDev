@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class PlayerAnim : MonoBehaviour
 {
-    private Player Player;
+    private Player player;
     private Animator anim;
 
     private PlayerItems playerItems;
 
+    public static PlayerAnim Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        Player = GetComponent<Player>();
+        player = GetComponent<Player>();
         anim = GetComponent<Animator>();
         playerItems = GetComponent<PlayerItems>();
     }
@@ -28,9 +35,9 @@ public class PlayerAnim : MonoBehaviour
 
     void OnMove()
     {
-        if (Player.direction.sqrMagnitude > 0)
+        if (player.direction.sqrMagnitude > 0)
         {
-            if (Player.isRolling)
+            if (player.isRolling)
             {
                 anim.SetTrigger("isRolling");
             }
@@ -45,44 +52,61 @@ public class PlayerAnim : MonoBehaviour
             anim.SetInteger("Transition", 0);
         }
 
-        if (Player.direction.x > 0)
+        if (player.direction.x > 0)
         {
             transform.eulerAngles = new Vector2(0, 0);
         }
 
-        if (Player.direction.x < 0)
+        if (player.direction.x < 0)
         {
             transform.eulerAngles = new Vector2(0, 180);
         }
 
-        if (Player.IsCutting)
+        if (player.IsCutting)
         {
             anim.SetInteger("Transition", 3);
         }
 
-        if (Player.IsDigging)
+        if (player.IsDigging)
         {
             anim.SetInteger("Transition", 4);
         }
 
-        if (Player.IsWatering && playerItems.CurrentWater > 0f)
+        if (player.IsWatering && playerItems.CurrentWater > 0f)
         {
             anim.SetInteger("Transition", 5);
         }
 
-        if (Player.IsWatering && playerItems.CurrentWater <= 0f)
+        if (player.IsWatering && playerItems.CurrentWater <= 0f)
         {
             anim.SetInteger("Transition", 6);
+        }
+
+        if(player.IsGettingWater)
+        {
+            anim.SetInteger("Transition", 7);
         }
     }
 
     void OnRun()
     {
-        if (Player.isRunning)
+        if (player.isRunning)
         {
             anim.SetInteger("Transition", 2);
         }
     }
 
     #endregion
+
+    public void OnFishingBegin()
+    {
+        anim.SetTrigger("isFishing");
+        Player.Instance.isPaused = true;
+    }
+
+    public void OnFishingEnd()
+    {
+        Fishing.Instance.OnFishing();
+        Player.Instance.isPaused = false;
+    }
 }

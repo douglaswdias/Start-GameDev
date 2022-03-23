@@ -9,23 +9,29 @@ public class Water : MonoBehaviour
     [SerializeField]
     private int waterValue;
 
-    private PlayerItems player;
+    private PlayerItems playerItems;
 
     public bool PlayerInRange { get => playerInRange; set => playerInRange = value; }
 
+    public static Water Instance;
+
+    void Awake()
+    {
+        Instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        player = FindObjectOfType<PlayerItems>();
+        playerItems = FindObjectOfType<PlayerItems>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (PlayerInRange && Input.GetKeyDown(KeyCode.E))
+        if (PlayerInRange && Player.Instance.Equip == 3 && Input.GetKeyDown(KeyCode.E))
         {
-            player.WaterLimit(waterValue);
+            playerItems.WaterLimit(waterValue);
         }
     }
 

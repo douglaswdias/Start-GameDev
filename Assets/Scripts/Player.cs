@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public bool isPaused;
+
     private Rigidbody2D rig;
     private Vector2 _direction;
 
@@ -12,72 +14,97 @@ public class Player : MonoBehaviour
     private float initialSpeed;
 
     private PlayerItems playerItems;
+    //private Player player;
 
     private bool _isRunning;
     private bool _isRolling;
     private bool _isCutting;
     private bool _IsDigging;
     private bool _IsWatering;
+    private bool _IsGettingWater;
+    private bool _IsFishing;
 
     private int equip;
 
 
-    public Vector2 direction{get { return _direction; }set { _direction = value; }}
-
-    public bool isRunning{get { return _isRunning; }set { _isRunning = value; }}
-
-    public bool isRolling{get { return _isRolling; }set { _isRolling = value; }}
-
+    public Vector2 direction{get => _direction; set => _direction = value; }
+    public bool isRunning{get => _isRunning; set => _isRunning = value; }
+    public bool isRolling{get => _isRolling; set => _isRolling = value; }
     public bool IsCutting { get => _isCutting; set => _isCutting = value; }
     public bool IsDigging { get => _IsDigging; set => _IsDigging = value; }
     public bool IsWatering { get => _IsWatering; set => _IsWatering = value; }
+    public bool IsGettingWater { get => _IsGettingWater; set => _IsGettingWater = value; }
+    public int Equip { get => equip; set => equip = value; }
+    public bool IsFishing { get => _IsFishing; set => _IsFishing = value; }
+
+    public static Player Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
         rig = GetComponent<Rigidbody2D>(); 
         playerItems = GetComponent<PlayerItems>();
+        //player = GetComponent<Player>();
+        Equip = 0;
 
         initialSpeed = speed;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (!isPaused)
         {
-            equip = 0;
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                Equip = 0;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                Equip = 1;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                Equip = 2;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                Equip = 3;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                Equip = 4;
+            }
+
+            OnInput();
+
+            OnRun();
+
+            OnRoll();
+
+            OnCutting();
+
+            OnDigging();
+
+            OnWatering();
+
+            OnFishing();
         }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            equip = 1;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            equip = 2;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            equip = 3;
-        }
-
-        OnInput();
-
-        OnRun();
-
-        OnRoll();
-
-        OnCutting();
-
-        OnDigging();
-
-        OnWatering();
     }
 
     private void FixedUpdate()
     {
-        OnMove();
+        if (!isPaused)
+        {
+            OnMove();
+        }
     }
 
     #region Moviment
@@ -124,7 +151,7 @@ public class Player : MonoBehaviour
 
     void OnCutting()
     {
-        if (equip == 1)
+        if (Equip == 1)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -142,7 +169,7 @@ public class Player : MonoBehaviour
 
     void OnDigging()
     {
-        if(equip == 2)
+        if(Equip == 2)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -160,7 +187,7 @@ public class Player : MonoBehaviour
 
     void OnWatering()
     {
-        if (equip == 3)
+        if (Equip == 3)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -182,6 +209,34 @@ public class Player : MonoBehaviour
             if (playerItems.CurrentWater <= 0)
             {
                 playerItems.CurrentWater = 0;
+            }
+
+            if (Water.Instance.PlayerInRange && Input.GetKeyDown(KeyCode.E))
+            {
+                IsGettingWater = true;
+            }
+
+            if (Water.Instance.PlayerInRange && Input.GetKeyUp(KeyCode.E))
+            {
+                IsGettingWater = false;
+            }
+        }
+    }
+
+    void OnFishing()
+    {
+        if (Equip == 4 && Fishing.Instance.PlayerInRange)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                IsFishing = true;
+                speed = 0;
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                IsFishing = false;
+                speed = initialSpeed;
             }
         }
     }
