@@ -109,4 +109,17 @@ public class PlayerAnim : MonoBehaviour
         Fishing.Instance.OnFishing();
         Player.Instance.isPaused = false;
     }
+
+
+    public void OnBuildingBegin()
+    {
+        anim.SetBool("Hammering", true);
+        Player.Instance.isPaused = true;
+    }
+
+    public void OnBuildingEnd()
+    {
+        anim.SetBool("Hammering", false);
+        Player.Instance.isPaused = false;
+    }
 }

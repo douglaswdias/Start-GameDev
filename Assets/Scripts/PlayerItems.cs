@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerItems : MonoBehaviour
 {
+    public static PlayerItems Instance;
+
     [SerializeField] private int totalWood;
     [SerializeField] private float currentWater;
     [SerializeField] private int carrots;
@@ -24,6 +26,11 @@ public class PlayerItems : MonoBehaviour
     public float WaterLimite { get => waterLimite; set => waterLimite = value; }
     public float FishLimite { get => fishLimite; set => fishLimite = value; }
 
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     public void WaterLimit(int water)
     {
